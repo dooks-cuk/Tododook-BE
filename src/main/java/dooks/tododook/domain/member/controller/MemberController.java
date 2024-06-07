@@ -17,14 +17,14 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Void> registerUser(@RequestBody final SignupRequest memberRequest){
+    public ResponseEntity<Void> registerMember(@RequestBody final SignupRequest memberRequest){
         memberService.signup(memberRequest);
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok().build(); // Todo: 나중에 create 상태코드로 변경
     }
 
     @PostMapping("/login")
     public ResponseEntity<TokenResponse> Login(@RequestBody final LoginRequest loginRequest){
         TokenResponse tokenResponse = memberService.login(loginRequest);
-        return ResponseEntity.badRequest().body(tokenResponse);
+        return ResponseEntity.ok().body(tokenResponse);
     }
 }
