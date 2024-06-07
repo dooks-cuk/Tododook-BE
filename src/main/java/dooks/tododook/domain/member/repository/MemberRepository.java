@@ -1,6 +1,6 @@
-package dooks.tododook.domain.user.repository;
+package dooks.tododook.domain.member.repository;
 
-import dooks.tododook.domain.user.entity.Member;
+import dooks.tododook.domain.member.entity.Member;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

@@ -6,15 +6,11 @@ import lombok.Getter;
 
 @Getter
 @AllArgsConstructor(access = AccessLevel.PRIVATE)
-public class TokenResponse {
-    Long id;
-    String email;
+public class TokenResponse {//todo: refresh token 추가
     String accessToken;
 
-    public static TokenResponse of(Long id, String email, String accessToken){
+    public static TokenResponse of(String accessToken){
         return new TokenResponse(
-                id,
-                email,
                 accessToken
         );
     }

@@ -1,11 +1,11 @@
-package dooks.tododook.domain.user.dto;
+package dooks.tododook.domain.member.dto;
 
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Getter
 @NoArgsConstructor
-public class MemberRequest {
+public class SignupRequest {
     Long id;
     String email;
     String username;
