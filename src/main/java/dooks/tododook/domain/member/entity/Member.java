@@ -1,5 +1,6 @@
-package dooks.tododook.domain.user.entity;
+package dooks.tododook.domain.member.entity;
 
+import dooks.tododook.global.BaseTimeEntity;
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Builder;
@@ -9,19 +10,21 @@ import lombok.NoArgsConstructor;
 @Entity
 @NoArgsConstructor(access = AccessLevel.PROTECTED)
 @Getter
-public class Member {
+public class Member extends BaseTimeEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     @Column(unique = true)
     private String email;
+    private Role role;
     private String username;
     private String password;
 
     @Builder
-    public Member(Long id, String email, String username, String password) {
+    public Member(Long id, String email, Role role, String username, String password) {
         this.id = id;
         this.email = email;
+        this.role = role;
         this.username = username;
         this.password = password;
     }

@@ -1,39 +1,98 @@
 package dooks.tododook.domain.auth.service;
 
-import dooks.tododook.domain.user.entity.Member;
+import dooks.tododook.domain.auth.jwt.UserDetailsImpl;
+import dooks.tododook.domain.auth.jwt.UserDetailsServiceImpl;
 import io.jsonwebtoken.Claims;
+import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
-import org.springframework.stereotype.Service;
+import io.jsonwebtoken.io.Decoders;
+import io.jsonwebtoken.security.Keys;
+import jakarta.annotation.PostConstruct;
+import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.stereotype.Component;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.time.Instant;
-import java.time.temporal.ChronoUnit;
+import java.security.Key;
 import java.util.Date;
 
-@Service
+@Slf4j
+@Component
 public class TokenProvider {
-    private static final String SECRET_KEY = "NMA8JPctFuna59f5";
+    private final UserDetailsServiceImpl userDetailsService;
 
-    public String create(Member member){
-        Date expprieDate = Date.from(
-                Instant.now()
-                        .plus(1,ChronoUnit.DAYS));
+    private static final String AUTHORITIES_KEY = "role";
+    private static final String EMAIL_KEY = "email";
 
-                return Jwts.builder()
-                        .signWith(SignatureAlgorithm.ES512, SECRET_KEY)
-                        .setSubject(member.getId().toString()) //Todo: 수정 예정
-                        .setIssuer("todo app")
-                        .setIssuedAt(new Date())
-                        .setExpiration(expprieDate)
-                        .compact();
+    @Value("${jwt.access-token-valid-time-in-milliseconds}")
+    private Long ACCESS_TOKEN_VALID_TIME;
+    @Value("${jwt.secret-key}")
+    private String SECRET_KEY;
+    private static Key signingKey;
+
+    public TokenProvider(UserDetailsServiceImpl userDetailsService) {
+        this.userDetailsService = userDetailsService;
     }
 
-    public String validateAndGetUserId(String token){
-        Claims claims = Jwts.parser()
-                .setSigningKey(SECRET_KEY)
-                .parseClaimsJws(token)
-                .getBody();
+    @PostConstruct
+    protected void init() {
+        byte[] secretKeyBytes = Decoders.BASE64.decode(SECRET_KEY);
+        signingKey = Keys.hmacShaKeyFor(secretKeyBytes);
+    }
 
-        return claims.getSubject();
+
+    @Transactional
+    public String createToken(String email, String authorities) {
+        String accessToken = Jwts.builder()
+                .setHeaderParam("typ", "JWT")
+                .setHeaderParam("alg", "HS512")
+                .setIssuedAt(new Date())
+                .setExpiration(new Date(System.currentTimeMillis() + ACCESS_TOKEN_VALID_TIME))
+                .setSubject("access-token")
+                .claim(EMAIL_KEY, email)
+                .claim(AUTHORITIES_KEY, authorities)
+                .signWith(signingKey, SignatureAlgorithm.HS512)
+                .compact();
+
+        return accessToken;
+    }
+
+    public Claims getClaims(String token) {
+        try {
+            return Jwts.parserBuilder()
+                    .setSigningKey(signingKey)
+                    .build()
+                    .parseClaimsJws(token)
+                    .getBody();
+        } catch (ExpiredJwtException e) { // Access Token
+            return e.getClaims();
+        }
+    }
+
+    public Authentication getAuthentication(String token) {
+        String email = getClaims(token).get(EMAIL_KEY).toString();
+        UserDetailsImpl userDetailsImpl = userDetailsService.loadUserByUsername(email);
+        return new UsernamePasswordAuthenticationToken(userDetailsImpl, "", userDetailsImpl.getAuthorities());
+    }
+
+    public long getTokenExpirationTime(String token) {
+        return getClaims(token).getExpiration().getTime();
+    }
+
+    public boolean validateAccessToken(String accessToken) {
+        try{
+            Jwts.parserBuilder()
+                    .setSigningKey(signingKey)
+                    .build()
+                    .parseClaimsJws(accessToken);
+            return true;
+        } catch(ExpiredJwtException e) {
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
