@@ -5,6 +5,7 @@ import dooks.tododook.domain.member.dto.LoginRequest;
 import dooks.tododook.domain.member.dto.SignupRequest;
 import dooks.tododook.domain.member.service.MemberService;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -17,9 +18,9 @@ public class MemberController {
     private final MemberService memberService;
 
     @PostMapping("/signup")
-    public ResponseEntity<Void> registerMember(@RequestBody final SignupRequest memberRequest){
-        memberService.signup(memberRequest);
-        return ResponseEntity.ok().build(); // Todo: 나중에 create 상태코드로 변경
+    public ResponseEntity<Void> registerMember(@RequestBody final SignupRequest signupRequest){
+        memberService.signup(signupRequest);
+        return ResponseEntity.status(HttpStatus.CREATED).build();
     }
 
     @PostMapping("/login")
