@@ -1,0 +1,72 @@
+## Todo리스트 생성
+POST http://localhost:8080/todo
+Authorization: Bearer {{auth_token}}
+Content-type: application/json
+
+{
+  "title": "My first todo1",
+  "done": false
+}
+
+
+###
+POST http://localhost:8080/todo
+Authorization: Bearer {{auth_token}}
+Content-type: application/json
+
+{
+  "title": "My second todo",
+  "done": false
+}
+
+###
+GET http://localhost:8080/todo
+Authorization: Bearer {{auth_token}}
+
+###
+PUT http://localhost:8080/todo
+Authorization: Bearer {{auth_token}}
+Content-type: application/json
+
+{
+  "id": "ff8080818ffb3eec018ffb3f21300002",
+  "title": "Update my first todo",
+  "done": true
+}
+
+###
+DELETE http://localhost:8080/todo
+Authorization: Bearer {{auth_token}}
+Content-type: application/json
+
+{
+  "id": "ff8080818ffb3eec018ffb3f21300002"
+}
+
+###
+POST http://localhost:8080/api/auth/signup
+Content-type: application/json
+
+{
+  "email": "user01@gamail.com",
+  "username": "user01",
+  "password": "12345"
+}
+
+###
+POST http://localhost:8080/api/auth/login
+Content-type: application/json
+
+{
+  "email": "user01@gamail.com",
+  "password": "12345"
+}
+
+> {%
+    client.global.set("auth_token", response.body.accessToken);
+%}
+
+
+
+
+
