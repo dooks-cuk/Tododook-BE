@@ -5,6 +5,7 @@ import dooks.tododook.domain.auth.jwt.UserDetailsImpl;
 import dooks.tododook.domain.todo.dto.TodoRequest;
 import dooks.tododook.domain.todo.dto.TodoResponse;
 import dooks.tododook.domain.todo.service.TodoService;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -18,9 +19,10 @@ import java.util.List;
 @CrossOrigin(origins="*")
 @RestController
 @RequestMapping("todo")
+@RequiredArgsConstructor
 public class TodoController {
-    @Autowired
-    private TodoService service;
+
+    private final TodoService service;
 
 
     @PostMapping

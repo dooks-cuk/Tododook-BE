@@ -23,6 +23,7 @@ public class TodoEntity {
     private String id;
     private Long userId;
     private String title;
-    private String priority;
+    private Priority priority;
+    private Category category;
     private boolean done;
 }
