@@ -1,6 +1,8 @@
 package dooks.tododook.domain.todo.dto;
 
 
+import dooks.tododook.domain.todo.entity.Category;
+import dooks.tododook.domain.todo.entity.Priority;
 import dooks.tododook.domain.todo.entity.TodoEntity;
 import lombok.AccessLevel;
 import lombok.AllArgsConstructor;
@@ -14,7 +16,8 @@ import java.util.stream.Collectors;
 public class TodoResponse {
     String id;
     String title;
-    String priority;
+    Priority priority;
+    String categoryColor;
     boolean done;
 
     public static TodoResponse of(TodoEntity entity) {
@@ -22,6 +25,7 @@ public class TodoResponse {
                 entity.getId(),
                 entity.getTitle(),
                 entity.getPriority(),
+                entity.getCategory().getColor(),
                 entity.isDone()
 
         );
