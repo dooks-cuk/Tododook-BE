@@ -2,6 +2,7 @@ package dooks.tododook.domain.auth.service;
 
 import dooks.tododook.domain.auth.jwt.UserDetailsImpl;
 import dooks.tododook.domain.auth.jwt.UserDetailsServiceImpl;
+import dooks.tododook.domain.member.exception.MemberException;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.ExpiredJwtException;
 import io.jsonwebtoken.Jwts;
@@ -73,9 +74,9 @@ public class TokenProvider {
     }
 
     public Authentication getAuthentication(String token) {
-        String email = getClaims(token).get(EMAIL_KEY).toString();
-        UserDetailsImpl userDetailsImpl = userDetailsService.loadUserByUsername(email);
-        return new UsernamePasswordAuthenticationToken(userDetailsImpl, "", userDetailsImpl.getAuthorities());
+            String email = getClaims(token).get(EMAIL_KEY).toString();
+            UserDetailsImpl userDetailsImpl = userDetailsService.loadUserByUsername(email);
+            return new UsernamePasswordAuthenticationToken(userDetailsImpl, "", userDetailsImpl.getAuthorities());
     }
 
     public long getTokenExpirationTime(String token) {

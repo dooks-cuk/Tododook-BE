@@ -19,13 +19,15 @@ public class Member extends BaseTimeEntity {
     private Role role;
     private String username;
     private String password;
+    private Long kakaoId;
 
     @Builder
-    public Member(Long id, String email, Role role, String username, String password) {
+    public Member(Long id, String email, Role role, String username, String password, Long kakaoId) {
         this.id = id;
         this.email = email;
         this.role = role;
         this.username = username;
         this.password = password;
+        this.kakaoId = kakaoId;
     }
 }

@@ -18,6 +18,6 @@ public class UserDetailsServiceImpl implements UserDetailsService {
         Member member = memberRepository.findByEmail(email)
                 .orElseThrow(() -> new UsernameNotFoundException("Can't find user with this email: "+email));
 
-        return member != null ? UserDetailsImpl.of(member) : null;
+        return UserDetailsImpl.of(member);
     }
 }
