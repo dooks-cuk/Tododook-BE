@@ -1,3 +1,7 @@
+## 🔥 프로젝트 소개
+- Tododook은 나만의 할 일 목록을 만들 수 있는 서비스입니다.
+- Tododook을 통해 작업을 쉽게 분류하고, 우선순위를 설정하며, 활동을 효율적으로 관리할 수 있습니다.
+- 간단하고 직관적인 인터페이스로 일정을 쉽게 파악해보세요.
 ## 🧑🏻‍💻 Contributor
 
 | ![](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/teadmoo?v=4&h=250&w=250&fit=cover&mask=circle&maxage=7d)  | ![](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/sor999?v=4&h=250&w=250&fit=cover&mask=circle&maxage=7d) |
