@@ -61,7 +61,7 @@ public class OAuthService {
                     .password(passwordEncoder.encode(kakaoSecretPassword))
                     .kakaoId(kakaoMemberResponse.getId())
                     .username(kakaoMemberResponse.getNickname())
-                    .role(Role.USER)
+                    .role(Role.KAKAO)
                     .build();
             memberRepository.save(member);
         }
