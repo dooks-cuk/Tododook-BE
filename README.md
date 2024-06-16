@@ -1,4 +1,14 @@
-## 기능 소개
+## 🧑🏻‍💻 Contributor
+
+| ![](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/teadmoo?v=4&h=250&w=250&fit=cover&mask=circle&maxage=7d)  | ![](https://images.weserv.nl/?url=https://avatars.githubusercontent.com/sor999?v=4&h=250&w=250&fit=cover&mask=circle&maxage=7d) |
+| :-------------------------------------------------------------------------------------------------------------------------------------------: | :--------------------------------------------------------------------------------------------------------------------------------------------------: |
+| [강능요](https://github.com/teadmoo) | [박현제](https://github.com/sor999) |
+| Full Stack | Full Stack |
+
+
+
+
+## ✍️ 기능 소개
 ### 기본 기능
 - [x] JWT 로그인, 회원가입, 로그아웃
 - [x] TODO LIST 추가, 조회, 수정, 삭제
