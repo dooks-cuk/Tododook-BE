@@ -1,9 +1,11 @@
 spring:
   datasource:
-    url: jdbc:h2:mem:~:test
+    url: jdbc:h2:~/test
     username: sa
     password:
     driver-class-name: org.h2.Driver
+
+
 
   h2:
     console:
@@ -25,3 +27,21 @@ jwt:
   secret-key: CwS0ejODKrwKcZFCkXAeScfgixh2dKKtZj4eN5FdJoDHAeXpd7ScsxDqCmTGJtOGhQ75T33L1thACccTgjXuvw==
   access-token-valid-time-in-milliseconds: 86400000 #1 day
 
+oauth2:
+  client:
+    registration:
+      kakao:
+        client-id: ${KAKAO_CLIENT_ID}
+        client-secret: ${KAKAO_CLIENT_SECRET}
+        redirect-uri: "http://localhost:3000/login/oauth2/callback/kakao"
+        authorization-grant-type: authorization_code
+        scope: profile
+        client-name: Kakao
+    provider:
+      kakao:
+        authorization-uri: "https://kauth.kakao.com/oauth/authorize"
+        token-uri: "https://kauth.kakao.com/oauth/token"
+        user-info-uri: "https://kapi.kakao.com/v2/user/me"
+        user-name-attribute: id
+kakao:
+  secret-password: 213dasd23ihdwuiadhuisui3287198saddsa429yqwuhauhdshsd
