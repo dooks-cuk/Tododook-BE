@@ -1,6 +1,5 @@
 package dooks.tododook.global.exception;
 
-import dooks.tododook.global.exception.ErrorCode;
 import lombok.Getter;
 
 @Getter

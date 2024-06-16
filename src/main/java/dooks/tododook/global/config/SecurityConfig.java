@@ -17,10 +17,6 @@ import org.springframework.security.config.annotation.web.configurers.AbstractHt
 import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.security.oauth2.client.registration.ClientRegistration;
-import org.springframework.security.oauth2.client.registration.ClientRegistrations;
-import org.springframework.security.oauth2.client.registration.InMemoryClientRegistrationRepository;
-import org.springframework.security.oauth2.core.AuthorizationGrantType;
 import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
 import org.springframework.web.cors.CorsConfiguration;
@@ -37,7 +33,6 @@ public class SecurityConfig{
     private final JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
     private final JwtAccessDeniedHandler jwtAccessDeniedHandler;
     private final TokenProvider tokenProvider;
-
 
     @Bean
     PasswordEncoder passwordEncoder() {
@@ -74,11 +69,6 @@ public class SecurityConfig{
                                 "/login/**"
                         ).permitAll()
                         .anyRequest().authenticated()
-//                )
-//                .oauth2Login(oauth2Login ->
-//                        oauth2Login
-//                                .defaultSuccessUrl("/loginSuccess")
-//                                .failureUrl("/loginFailure")
                 );
         return http.build();
     }
@@ -88,8 +78,7 @@ public class SecurityConfig{
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3000");
-        //config.setAllowedOrigins(List.of("http://localhost:3000", "http://localhost:8080")); //todo: IP 추가
+        config.setAllowedOrigins(List.of("http://localhost:3000")); //todo: IP 추가
         config.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "PATCH", "OPTIONS"));
         config.setAllowedHeaders(Collections.singletonList("*"));
         config.setExposedHeaders(Collections.singletonList("*"));
@@ -98,25 +87,4 @@ public class SecurityConfig{
         source.registerCorsConfiguration("/**", config);
         return source;
     }
-//    @Bean
-//    public InMemoryClientRegistrationRepository clientRegistrationRepository() {
-//        return new InMemoryClientRegistrationRepository(Collections.singletonList(this.kakaoClientRegistration()));
-//    }
-
-//    private ClientRegistration kakaoClientRegistration() {
-//        return ClientRegistrations
-//                .fromIssuerLocation("https://kauth.kakao.com")
-//                .registrationId("kakao")
-//                .clientId("YOUR_CLIENT_ID")
-//                .clientSecret("YOUR_CLIENT_SECRET")
-//                .redirectUri("{baseUrl}/login/oauth2/code/{registrationId}")
-//                .scope("profile")
-//                .authorizationGrantType(AuthorizationGrantType.AUTHORIZATION_CODE)
-//                .tokenUri("https://kauth.kakao.com/oauth/token")
-//                .authorizationUri("https://kauth.kakao.com/oauth/authorize")
-//                .userInfoUri("https://kapi.kakao.com/v2/user/me")
-//                .userNameAttributeName("id")
-//                .clientName("Kakao")
-//                .build();
-//    }
 }
