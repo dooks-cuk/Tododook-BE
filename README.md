@@ -12,7 +12,6 @@
   - [x] CommonException과 ErrorCode를 정의하고, 각 도메인마다 예외 개별 정의
   - [x] GlobalExceptionHandler를 이용한 전역 예외처리
 - todo 리스트
-  - [x] 카테고리 기능
   - [x] 선택 삭제 기능
   - [x] 일괄 삭제 기능
   - [x] todo 진척도 표시 기능
