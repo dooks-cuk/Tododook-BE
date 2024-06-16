@@ -5,6 +5,11 @@
 | [강능요](https://github.com/teadmoo) | [박현제](https://github.com/sor999) |
 | Full Stack | Full Stack |
 
+## ⚙️ 개발 환경
+- Front-end : React(v18.3.1), Node.js(v20.14.0)
+- Back-end : Spring(v3.2.5), java 17
+- DB: H2
+- 버전 및 이슈관리 : Git, Github, Github Issues
 
 
 
