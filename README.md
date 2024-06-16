@@ -19,8 +19,11 @@
     - 권한 handler 추가
   - [x] 소셜 로그인
 - 커스텀 예외처리
-  - [x] CommonException과 ErrorCode를 정의하고, 각 도메인마다 예외 개별 정의
-  - [x] GlobalExceptionHandler를 이용한 전역 예외처리
+  - 백엔드
+    - [x] CommonException과 ErrorCode를 정의하고, 각 도메인마다 예외 개별 정의
+    - [x] GlobalExceptionHandler를 이용한 전역 예외처리
+  - 프론트엔드
+    - [x] 로그인, 회원가입에서 잘못된 정보 입력시 검증메시지 출력
 - todo 리스트
   - [x] 선택 삭제 기능
   - [x] 일괄 삭제 기능
